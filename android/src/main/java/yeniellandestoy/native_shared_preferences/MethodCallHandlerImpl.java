@@ -56,17 +56,22 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
    * SharedPreferences} based on the {@code context}.
    */
   MethodCallHandlerImpl(Context context) {
-    SharedPreferences pref;
-    try {
-      String resourceName = getResourceFromContext(context, "flutter_shared_pref_name");
-      Log.d("SharedPreferences:", "using custom resource name - " + resourceName);
-      pref = context.getSharedPreferences(resourceName, Context.MODE_PRIVATE);
-    } catch (IllegalArgumentException e) {
-      Log.d("SharedPreferences:", "using default resource name");
-      pref = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-    }
-    preferences = pref;
     this.context = context;
+
+    String sharedPrefName;
+    try {
+      sharedPrefName = getResourceFromContext(context, "flutter_shared_pref_name");
+      Log.d("SharedPreferences:", "Using custom resource name - " + sharedPrefName);
+    } catch (IllegalArgumentException e) {
+      sharedPrefName = context.getString(R.string.flutter_shared_pref_name); // fallback
+      Log.d("SharedPreferences:", "Using default resource name");
+    }
+    preferences = context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE);
+
+    // Load encoded prefixes from resources
+    LIST_IDENTIFIER = getResourceFromContext(context, "list_identifier");
+    BIG_INTEGER_PREFIX = getResourceFromContext(context, "big_integer_prefix");
+    DOUBLE_PREFIX = getResourceFromContext(context, "double_prefix");
   }
 
   @Override

@@ -1,0 +1,6 @@
+<resources>
+    <string name="flutter_shared_pref_name">FlutterSharedPreferences</string>
+    <string name="list_identifier">VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu</string>
+    <string name="big_integer_prefix">VGhpcyBpcyB0aGUgcHJlZml4IGZvciBCaWdJbnRlZ2Vy</string>
+    <string name="double_prefix">VGhpcyBpcyB0aGUgcHJlZml4IGZvciBEb3VibGUu</string>
+</resources>
