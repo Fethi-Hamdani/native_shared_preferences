@@ -36,9 +36,9 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
   private static final String SHARED_PREFERENCES_NAME = "FlutterSharedPreferences";
 
   // Fun fact: The following is a base64 encoding of the string "This is the prefix for a list."
-  private static final String LIST_IDENTIFIER = "VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu";
-  private static final String BIG_INTEGER_PREFIX = "VGhpcyBpcyB0aGUgcHJlZml4IGZvciBCaWdJbnRlZ2Vy";
-  private static final String DOUBLE_PREFIX = "VGhpcyBpcyB0aGUgcHJlZml4IGZvciBEb3VibGUu";
+  private static final String LIST_IDENTIFIER = getResourceFromContext(context, "list_identifier");
+  private static final String BIG_INTEGER_PREFIX = getResourceFromContext(context, "big_integer_prefix");
+  private static final String DOUBLE_PREFIX = getResourceFromContext(context, "double_prefix");
 
   private final SharedPreferences preferences;
   private final Context context;
@@ -67,11 +67,6 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
       Log.d("SharedPreferences:", "Using default resource name");
     }
     preferences = context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE);
-
-    // Load encoded prefixes from resources
-    LIST_IDENTIFIER = getResourceFromContext(context, "list_identifier");
-    BIG_INTEGER_PREFIX = getResourceFromContext(context, "big_integer_prefix");
-    DOUBLE_PREFIX = getResourceFromContext(context, "double_prefix");
   }
 
   @Override
